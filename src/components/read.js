@@ -1,33 +1,27 @@
 import React from 'react';
+import axios from 'axios';
 import { Movies } from './movies';
 
 export class Read extends React.Component {
 
     state = {
-        movies: [
-            {
-                "Title": "Avengers: Infinity War",
-                "Year": "2018",
-                "imdbID": "tt4154756",
-                "Type": "movie",
-                "Poster": "https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_SX300.jpg"
-            },
-            {
-                "Title": "Captain America: Civil War",
-                "Year": "2016",
-                "imdbID": "tt3498820",
-                "Type": "movie",
-                "Poster": "https://m.media-amazon.com/images/M/MV5BMjQ0MTgyNjAxMV5BMl5BanBnXkFtZTgwNjUzMDkyODE@._V1_SX300.jpg"
-            },
-            {
-                "Title": "Charlie Wilson's War",
-                "Year": "2007",
-                "imdbID": "tt0472062",
-                "Type": "movie",
-                "Poster": "https://m.media-amazon.com/images/M/MV5BMTgwMDgwMDc4MF5BMl5BanBnXkFtZTYwOTU3MDM4._V1_SX300.jpg"
-            }
-        ]
+        movies: [        ]
     };
+
+    componentDidMount(){
+        // adding in the url for the json blob. axios lets us make http request to a site to
+        // pull data from and display it in the webapp.
+        axios.get('https://jsonblob.com/api/jsonblob/520c3b5e-0312-11eb-a6af-cbf00d776032')
+        .then(response => {
+            // this then takes the data and passes it back up to the movies array
+            // in the state.
+            this.setState({movies:response.data.Search});
+        })
+        .catch((error)=>{// here we are just throwing an error to the console.
+            console.log(error);
+        });
+    }
+
     render() {
         return (
             // specifying what we want to dislay in the header component
