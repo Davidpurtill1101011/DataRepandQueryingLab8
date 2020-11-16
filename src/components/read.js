@@ -11,11 +11,11 @@ export class Read extends React.Component {
     componentDidMount(){
         // adding in the url for the json blob. axios lets us make http request to a site to
         // pull data from and display it in the webapp.
-        axios.get('https://jsonblob.com/api/jsonblob/520c3b5e-0312-11eb-a6af-cbf00d776032')
+        axios.get('http://localhost:4000/api/movies')
         .then(response => {
             // this then takes the data and passes it back up to the movies array
             // in the state.
-            this.setState({movies:response.data.Search});
+            this.setState({movies:response.data.myMovies});
         })
         .catch((error)=>{// here we are just throwing an error to the console.
             console.log(error);

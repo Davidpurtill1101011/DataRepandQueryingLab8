@@ -1,5 +1,5 @@
 import React from 'react';
-
+import axios from 'axios';
 export class Create extends React.Component {
 
     constructor() {
@@ -31,9 +31,19 @@ export class Create extends React.Component {
             Poster: e.target.value
         })
     }
-
+    // submit is used for updateing the movies read page.
     onSubmit(e) {
-        alert("Movie added " + this.state.Title)
+        e.preventDefault();
+        alert("Movie added " + this.state.Title + " " + this.state.Year + " " + this.state.Poster);
+        const newMovie= {
+            Title:this.state.Title,
+            Year:this.state.Year,
+            Poster: this.state.Poster
+        }
+        // axios is used for linking the server and the web app
+        axios.post('http://localhost:4000/api/movies', newMovie).then(response => console.log(
+            response.data
+        )).catch(error => console.log(error));
     }
 
     onChangeMovieYear(e){
