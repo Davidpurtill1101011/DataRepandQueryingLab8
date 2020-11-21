@@ -32,6 +32,7 @@ export class Create extends React.Component {
         })
     }
     // submit is used for updateing the movies read page.
+    // and adding them to the database
     onSubmit(e) {
         e.preventDefault();
         alert("Movie added " + this.state.Title + " " + this.state.Year + " " + this.state.Poster);

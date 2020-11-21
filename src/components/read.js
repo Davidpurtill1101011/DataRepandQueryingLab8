@@ -15,7 +15,7 @@ export class Read extends React.Component {
         .then(response => {
             // this then takes the data and passes it back up to the movies array
             // in the state.
-            this.setState({movies:response.data.myMovies});
+            this.setState({movies:response.data});
         })
         .catch((error)=>{// here we are just throwing an error to the console.
             console.log(error);
