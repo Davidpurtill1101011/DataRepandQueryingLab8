@@ -7,7 +7,7 @@ export class Movies extends React.Component{
         // pass everyting from the movieItem to
         // the movies page so it can be dislayed.
         return this.props.movies.map((movie)=>{
-            return <MovieItem movies={movie}></MovieItem>
+            return <MovieItem movies={movie} key={movie._id} ReloadData={this.props.ReloadData}></MovieItem>
         })
     }
 }

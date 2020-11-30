@@ -3,10 +3,27 @@ import axios from 'axios';
 import { Movies } from './movies';
 
 export class Read extends React.Component {
-
+    constructor(){
+        super();
+        this.ReloadData = this.ReloadData.bind(this);
+    }
     state = {
         movies: [        ]
     };
+    // multi inheritance
+    ReloadData(){
+         // adding in the url for the json blob. axios lets us make http request to a site to
+        // pull data from and display it in the webapp.
+        axios.get('http://localhost:4000/api/movies')
+        .then(response => {
+            // this then takes the data and passes it back up to the movies array
+            // in the state.
+            this.setState({movies:response.data});
+        })
+        .catch((error)=>{// here we are just throwing an error to the console.
+            console.log(error);
+        });
+    }
 
     componentDidMount(){
         // adding in the url for the json blob. axios lets us make http request to a site to
@@ -28,7 +45,7 @@ export class Read extends React.Component {
             //JSX
             <div>
                 <h1>This is the read Component</h1>
-                <Movies movies={this.state.movies}></Movies>
+                <Movies movies={this.state.movies} ReloadData={this.ReloadData}></Movies>
             </div>
         );
     }

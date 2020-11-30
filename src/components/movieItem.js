@@ -1,6 +1,27 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 export class MovieItem extends React.Component {
+
+    constructor(){
+        super();
+        // we need to bind the deleteMovie to make sure it works.
+        this.DeleteMovie = this.DeleteMovie.bind(this);
+    }
+
+    DeleteMovie(e){
+        e.preventDefault();
+        // making the changes on the client side.
+        axios.delete('http://localhost:4000/api/movies/' + this.props.movies._id)
+        .then(()=>{
+            this.props.ReloadData();
+        })
+        .catch((err)=>{
+            console.log(err);
+        });
+    }
+
     render() {
 
         return (
@@ -19,6 +40,8 @@ export class MovieItem extends React.Component {
                             </footer>
                         </blockquote>
                     </Card.Body>
+                    {/* adding the button to delete a movie from the db */}
+                    <Button variant="danger" onClick={this.DeleteMovie} size="lg">Delete</Button>
                 </Card>
             </div>
         );
